@@ -1,11 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Prisma 10</title>
+<!doctype html><html lang="pt-BR"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Prisma 10</title><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-/* Layout: cabeçalho fixo, páginas por hash (início, jogadores, ficha, Bola de Ouro, comparar). Grade de 12 colunas simples, cartões só onde há objeto clicável. */
+/* Layout: cabeçalho fixo, páginas por hash (início, jogadores, ficha, Bola de Ouro, Puskás, The Best, comparar). */
 :root{
   --bg:#F2F5F2; --surface:#FFFFFF; --surface-2:#E8EEE9; --ink:#0E1B15; --ink-2:#4B5C53; --ink-3:#7A8A81;
   --line:#D5DDD7; --accent:#0A6B49; --accent-ink:#FFFFFF; --accent-soft:#D9EEE3;
@@ -196,6 +195,29 @@ a.li:hover{background:var(--surface-2)}
 .hist .yr{font-family:var(--f-mono);font-weight:700}
 .hist .none{color:var(--ink-3);font-style:italic}
 
+/* Puskás e The Best */
+.aw-hero{background:var(--pitch);color:var(--on-pitch);border-radius:14px;padding:26px 28px;margin-bottom:18px;position:relative;overflow:hidden}
+.aw-hero::after{content:"";position:absolute;right:-70px;top:50%;width:240px;height:240px;margin-top:-120px;border:2px solid rgba(255,255,255,.09);border-radius:50%}
+.aw-hero>*{position:relative;z-index:1}
+.aw-hero .eyebrow{color:var(--on-pitch-2)}
+.aw-hero h2{font-size:clamp(32px,4.4vw,48px);margin-block:8px 4px}
+.aw-hero .sub{color:var(--on-pitch-2)}
+.aw-hero p.tx{margin-top:12px;max-width:58ch;color:var(--on-pitch)}
+.aw-hero a{border-bottom:1px solid rgba(255,255,255,.4)}
+.aw-lg{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:13px;margin:0 0 14px}
+.aw-lg i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+.aw .tr{grid-template-columns:56px minmax(0,1.6fr) minmax(0,1fr) 56px;align-items:start}
+.aw .yr{font-family:var(--f-mono);font-weight:700;padding-top:8px}
+.aw .win{display:flex;gap:11px;align-items:flex-start;min-width:0}
+.aw .win b{font-weight:600;display:block}
+.aw .win small{display:block;color:var(--ink-2);line-height:1.35}
+.aw .tr.br .yr::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-left:5px;vertical-align:middle}
+.aw .cc{justify-self:start;margin-top:8px}
+.aw .clb{padding-top:6px}
+.aw .tr[hidden]{display:none}
+.aw .win a{border-bottom:1px solid var(--line)}
+.src{color:var(--ink-3);font-size:12.5px;margin-top:14px}
+
 /* Comparador */
 .pick{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-bottom:22px}
 .pick label{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;font-weight:700}
@@ -236,6 +258,8 @@ footer b{color:var(--ink);font-family:var(--f-display);font-stretch:80%;font-siz
   .tr .lg,.tr.th .lg,.tr .ast{display:none}
   .hist .tr{grid-template-columns:54px minmax(0,1fr) 54px}
   .hist .tr .clb{display:none}
+  .aw .tr{grid-template-columns:50px minmax(0,1fr) 54px}
+  .aw .tr .clb{display:none}
 }
 @media (max-width:620px){
   .top .wrap{gap:6px 10px}
@@ -254,7 +278,7 @@ footer b{color:var(--ink);font-family:var(--f-display);font-stretch:80%;font-siz
   .cell .v{font-size:19px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-</style>
+</style></head><body>
 
 <header class="top">
   <div class="wrap">
@@ -265,6 +289,8 @@ footer b{color:var(--ink);font-family:var(--f-display);font-stretch:80%;font-siz
     <nav class="nav" id="nav" aria-label="Principal">
       <a href="#jogadores" data-r="jogadores">Jogadores</a>
       <a href="#bola-de-ouro" data-r="bola-de-ouro">Bola de Ouro</a>
+      <a href="#puskas" data-r="puskas">Puskás</a>
+      <a href="#the-best" data-r="the-best">The Best</a>
       <a href="#comparar" data-r="comparar">Comparar</a>
     </nav>
     <div class="tools">
@@ -286,7 +312,7 @@ footer b{color:var(--ink);font-family:var(--f-display);font-stretch:80%;font-siz
 
 <script>
 /* ---------- Dados (aproximados, temporada 2024/25; lendas em totais de carreira) ---------- */
-const PAISES={BRA:["Brasil",150],ARG:["Argentina",205],POR:["Portugal",5],FRA:["França",225],NOR:["Noruega",350],ESP:["Espanha",30],EGY:["Egito",45],ENG:["Inglaterra",350],BEL:["Bélgica",20],NED:["Países Baixos",25],POL:["Polônia",340],GER:["Alemanha",50],MAR:["Marrocos",0],CRO:["Croácia",215],SWE:["Suécia",195],NGA:["Nigéria",135],URU:["Uruguai",200],KOR:["Coreia do Sul",260],ITA:["Itália",210],URS:["União Soviética",355],CZE:["Rep. Tcheca",220],UKR:["Ucrânia",55]};
+const PAISES={BRA:["Brasil",150],ARG:["Argentina",205],POR:["Portugal",5],FRA:["França",225],NOR:["Noruega",350],ESP:["Espanha",30],EGY:["Egito",45],ENG:["Inglaterra",350],BEL:["Bélgica",20],NED:["Países Baixos",25],POL:["Polônia",340],GER:["Alemanha",50],MAR:["Marrocos",0],CRO:["Croácia",215],SWE:["Suécia",195],NGA:["Nigéria",135],URU:["Uruguai",200],KOR:["Coreia do Sul",260],ITA:["Itália",210],URS:["União Soviética",355],CZE:["Rep. Tcheca",220],UKR:["Ucrânia",55],TUR:["Turquia",10],SVK:["Eslováquia",235],COL:["Colômbia",50],MYS:["Malásia",320],HUN:["Hungria",120],SEN:["Senegal",140]};
 const RAW=[
 ["neymar-jr","Neymar Jr","BRA","Atacante","Santos","Brasileirão",88,7,6,19,1330,1992,175,"Driblador que cria espaço e joga aberto pela esquerda ou como segundo atacante.","Santos|2009–13;Barcelona|2013–17;PSG|2017–23;Al Hilal|2023–24;Santos|2025–"],
 ["lionel-messi","Lionel Messi","ARG","Atacante","Inter Miami","MLS",91,29,18,38,3250,1987,170,"Camisa 10 que organiza o jogo e finaliza, com passe e drible de altíssimo nível.","Barcelona|2004–21;PSG|2021–23;Inter Miami|2023–"],
@@ -340,6 +366,7 @@ const POS=["Atacante","Meia","Volante","Lateral","Zagueiro","Goleiro"];
 const LIGAS=[...new Set(PL.filter(p=>!p.leg).map(p=>p.liga))].sort((a,b)=>a.localeCompare(b,"pt"));
 const gp90=p=>p.m?p.g*90/p.m:null, ap90=p=>p.m&&p.a!=null?p.a*90/p.m:null, gap90=p=>p.m&&p.a!=null?(p.g+p.a)*90/p.m:null;
 const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const n0=v=>v==null?"—":Number(v).toLocaleString("pt-BR");
 const n2=v=>v==null?"—":v.toFixed(2).replace(".",",");
 const ini=p=>{const w=p.nome.split(" ");return (w.length===1?p.nome.slice(0,2):w[0][0]+w[w.length-1][0]).toUpperCase()};
@@ -355,7 +382,7 @@ const card=p=>`<a class="pcard" href="#jogador-${p.id}">
   <dl class="pc-stats">${triple(p).map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl></a>`;
 
 /* ---------- Estado ---------- */
-const S={q:"",pos:"Todos",liga:"Todas",ord:"nota",leg:true,a:"neymar-jr",b:"erling-haaland"};
+const S={q:"",pos:"Todos",liga:"Todas",ord:"nota",leg:true,a:"neymar-jr",b:"erling-haaland",aw:{puskas:"all","the-best":"all"}};
 const app=document.getElementById("app");
 
 /* ---------- Páginas ---------- */
@@ -377,7 +404,7 @@ function home(){
         <button class="btn pri" type="submit">Buscar</button>
         <div class="sugg" id="sg" hidden></div>
       </form>
-      <div class="cta"><a class="btn" href="#comparar" data-set="neymar-jr,erling-haaland">Comparar jogadores</a></div>
+      <div class="cta"><a class="btn" href="#comparar" data-set="neymar-jr,erling-haaland">Comparar jogadores</a><a class="btn" href="#puskas">Prêmio Puskás</a><a class="btn" href="#the-best">The Best</a></div>
     </div>
     <a class="feat" href="#jogador-${dest.id}" aria-label="Destaque: ${dest.nome}">
       <div>
@@ -389,7 +416,7 @@ function home(){
       <span class="go">Ver ficha completa</span>
     </a>
   </section>
-  <section class="strip"><div class="wrap" style="display:contents"></div>
+  <section class="strip">
     <div><b>${PL.length}</b><span>Jogadores no catálogo</span></div>
     <div><b>${LIGAS.length}</b><span>Ligas representadas</span></div>
     <div><b>${gols}</b><span>Gols somados (temporada)</span></div>
@@ -440,7 +467,7 @@ function jogadores(){
   app.innerHTML=`<section class="wrap pg-h"><div class="eyebrow">Catálogo · ${PL.length} perfis</div><h1>Jogadores</h1><p>Filtre por posição e liga, ordene pelo que importa e abra a ficha completa de cada perfil.</p></section>
   <section class="wrap">
     <div class="filters">
-      <input class="field" id="fq" type="search" placeholder="Buscar por nome, clube ou país" aria-label="Buscar jogador" value="${S.q.replace(/"/g,"&quot;")}">
+      <input class="field" id="fq" type="search" placeholder="Buscar por nome, clube ou país" aria-label="Buscar jogador" value="${esc(S.q)}">
       <select class="field" id="fl" aria-label="Liga"><option>Todas</option>${LIGAS.map(l=>`<option ${l===S.liga?"selected":""}>${l}</option>`).join("")}</select>
       <select class="field" id="fo" aria-label="Ordenar por">${[["nota","Maior nota"],["gols","Mais gols"],["assist","Mais assistências"],["nome","Nome (A–Z)"]].map(([v,t])=>`<option value="${v}" ${v===S.ord?"selected":""}>${t}</option>`).join("")}</select>
       <label class="chk"><input type="checkbox" id="fg" ${S.leg?"checked":""}> Incluir lendas</label>
@@ -538,6 +565,87 @@ function bola(){
   </section>`;
 }
 
+/* ---------- Puskás e The Best ---------- */
+/* Linhas: [ano, nome, país, clube, descrição, tipo, id da ficha (opcional)] */
+const AW={
+ puskas:{eyebrow:"Prêmio da FIFA · gol mais bonito do ano",title:"Prêmio Puskás",
+  lead:"Criado em 2009, em homenagem ao húngaro Ferenc Puskás. Foram 17 edições e 17 vencedores diferentes, de 2009 a 2025.",
+  hero:{tag:"Primeiro vencedor · 2009",nome:"Cristiano Ronaldo",id:"cristiano-ronaldo",sub:"Manchester United · Portugal",tx:"Nas quartas de final da Liga dos Campeões, contra o Porto, Cristiano Ronaldo bateu de muito longe e a bola foi no ângulo. O Manchester United venceu por 1 a 0."},
+  filtros:[["all","Todos"],["br","Brasileiros"],["clube","Gols por clube"],["selecao","Gols por seleção"]],
+  tiles:[["Edições","17","2009 a 2025"],["Brasil","3","Neymar, Wendell Lira e Madruga"],["Argentina","3","Lamela, Garnacho e Montiel"],["Prêmio Marta","2024","o Puskás passou a ser só masculino"]],
+  rows:[
+   [2009,"Cristiano Ronaldo","POR","Manchester United","Contra o Porto, Liga dos Campeões","clube","cristiano-ronaldo"],
+   [2010,"Hamit Altıntop","TUR","Seleção da Turquia","Contra o Cazaquistão, eliminatórias da Eurocopa","selecao"],
+   [2011,"Neymar","BRA","Santos","Contra o Flamengo, Campeonato Brasileiro","clube","neymar-jr"],
+   [2012,"Miroslav Stoch","SVK","Fenerbahçe","Contra o Gençlerbirliği, Campeonato Turco","clube"],
+   [2013,"Zlatan Ibrahimović","SWE","Seleção da Suécia","Contra a Inglaterra, amistoso","selecao"],
+   [2014,"James Rodríguez","COL","Seleção da Colômbia","Contra o Uruguai, Copa do Mundo","selecao"],
+   [2015,"Wendell Lira","BRA","Goianésia","Contra o Atlético-GO, Campeonato Goiano","clube"],
+   [2016,"Mohd Faiz Subri","MYS","Penang","Contra o Pahang, liga da Malásia","clube"],
+   [2017,"Olivier Giroud","FRA","Arsenal","Contra o Crystal Palace, Premier League","clube"],
+   [2018,"Mohamed Salah","EGY","Liverpool","Contra o Everton, Premier League","clube","mohamed-salah"],
+   [2019,"Dániel Zsóri","HUN","Debrecen","Contra o Ferencváros, campeonato húngaro","clube"],
+   [2020,"Son Heung-min","KOR","Tottenham","Contra o Burnley, Premier League","clube","son-heung-min"],
+   [2021,"Erik Lamela","ARG","Tottenham","Contra o Arsenal, Premier League","clube"],
+   [2022,"Marcin Oleksy","POL","Warta Poznań","Contra o Stal Rzeszów, futebol de amputados","clube"],
+   [2023,"Guilherme Madruga","BRA","Botafogo-SP","Contra o Novorizontino, Série B","clube"],
+   [2024,"Alejandro Garnacho","ARG","Manchester United","Contra o Everton, Premier League","clube"],
+   [2025,"Santiago Montiel","ARG","Independiente","Contra o Independiente Rivadavia, campeonato argentino","clube"]],
+  note:"Fonte: lista oficial de vencedores da FIFA e imprensa esportiva. O ano é o da edição do prêmio. Edições de 2009 a 2023 eram abertas a homens e mulheres."},
+ "the-best":{eyebrow:"Prêmio da FIFA · melhores do ano",title:"The Best FIFA",
+  lead:"Criado em 2016, quando a FIFA se separou da France Football e a Bola de Ouro voltou a ser só da revista. Aqui estão o melhor jogador e o melhor goleiro de cada edição.",
+  hero:{tag:"Mais recente · edição de 2025",nome:"Ousmane Dembélé",id:"ousmane-dembele",sub:"PSG · França",tx:"Dembélé levou o The Best de 2025 depois de ganhar a Bola de Ouro, e foi o primeiro francês a vencer o prêmio. A cerimônia foi em Doha, em 16 de dezembro de 2025."},
+  filtros:[["all","Todos"],["jogador","Melhor jogador"],["goleiro","Melhor goleiro"],["br","Brasileiros"]],
+  tiles:[["Messi","3","2019, 2022 e 2023"],["Cristiano Ronaldo","2","2016 e 2017"],["Lewandowski","2","2020 e 2021"],["Emiliano Martínez","2","melhor goleiro em 2022 e 2024"]],
+  rows:[
+   [2016,"Cristiano Ronaldo","POR","Real Madrid","Melhor jogador","jogador","cristiano-ronaldo"],
+   [2017,"Cristiano Ronaldo","POR","Real Madrid","Melhor jogador","jogador","cristiano-ronaldo"],
+   [2017,"Gianluigi Buffon","ITA","Juventus","Melhor goleiro","goleiro","gianluigi-buffon"],
+   [2018,"Luka Modrić","CRO","Real Madrid","Melhor jogador","jogador","luka-modric"],
+   [2018,"Thibaut Courtois","BEL","Real Madrid","Melhor goleiro","goleiro","thibaut-courtois"],
+   [2019,"Lionel Messi","ARG","Barcelona","Melhor jogador","jogador","lionel-messi"],
+   [2019,"Alisson Becker","BRA","Liverpool","Melhor goleiro","goleiro","alisson-becker"],
+   [2020,"Robert Lewandowski","POL","Bayern de Munique","Melhor jogador","jogador","robert-lewandowski"],
+   [2020,"Manuel Neuer","GER","Bayern de Munique","Melhor goleiro","goleiro"],
+   [2021,"Robert Lewandowski","POL","Bayern de Munique","Melhor jogador","jogador","robert-lewandowski"],
+   [2021,"Édouard Mendy","SEN","Chelsea","Melhor goleiro","goleiro"],
+   [2022,"Lionel Messi","ARG","PSG","Melhor jogador","jogador","lionel-messi"],
+   [2022,"Emiliano Martínez","ARG","Aston Villa","Melhor goleiro","goleiro","emiliano-martinez"],
+   [2023,"Lionel Messi","ARG","PSG e Inter Miami","Melhor jogador","jogador","lionel-messi"],
+   [2023,"Ederson","BRA","Manchester City","Melhor goleiro","goleiro"],
+   [2024,"Vinícius Júnior","BRA","Real Madrid","Melhor jogador","jogador","vinicius-junior"],
+   [2024,"Emiliano Martínez","ARG","Aston Villa","Melhor goleiro","goleiro","emiliano-martinez"],
+   [2025,"Ousmane Dembélé","FRA","PSG","Melhor jogador","jogador","ousmane-dembele"],
+   [2025,"Gianluigi Donnarumma","ITA","PSG","Melhor goleiro","goleiro"]],
+  note:"Fonte: lista oficial de vencedores da FIFA e imprensa esportiva. Clubes na época do prêmio. O ano é o da edição. O melhor goleiro só passou a ser premiado em 2017."}
+};
+function awMg(nome,pais,s){const w=nome.split(" ");const i=(w.length===1?nome.slice(0,2):w[0][0]+w[w.length-1][0]).toUpperCase();return `<span class="mg" style="--h:${PAISES[pais][1]};--s:${s}px" aria-hidden="true">${i}</span>`}
+function awards(key){
+  const c=AW[key],h=c.hero,hp=BY[h.id];
+  app.innerHTML=`<section class="wrap pg-h"><div class="eyebrow gold">${c.eyebrow}</div><h1>${c.title}</h1><p>${c.lead}</p></section>
+  <section class="wrap">
+    <div class="aw-hero"><div class="eyebrow">${h.tag}</div><h2>${h.nome}</h2><div class="sub">${h.sub}</div><p class="tx">${h.tx}</p>${hp?`<p class="tx"><a href="#jogador-${hp.id}">Ver ficha de ${hp.nome}</a></p>`:""}</div>
+    <div class="big">${c.tiles.map(([k,v,s])=>`<div class="tile"><small>${k}</small><b class="gold">${v}</b><em>${s}</em></div>`).join("")}</div>
+  </section>
+  <section class="wrap sec">
+    <div class="sec-h"><div><h2>Todos os vencedores</h2><p>Do primeiro ao mais recente, edição por edição.</p></div></div>
+    <div class="chips" id="awc" role="group" aria-label="Filtrar vencedores">${c.filtros.map(([f,t])=>`<button type="button" class="chip" data-f="${f}" aria-pressed="${f===S.aw[key]}">${t}</button>`).join("")}</div>
+    <div class="aw-lg"><i></i> Vencedor brasileiro</div>
+    <div class="tbl hist aw">
+      <div class="tr th"><span>Ano</span><span>Vencedor</span><span class="clb">Clube</span><span>País</span></div>
+      <div id="awl"></div>
+    </div>
+    <p class="src">${c.note}</p>
+  </section>`;
+  const draw=()=>{const f=S.aw[key];
+    const rs=c.rows.filter(r=>f==="all"||(f==="br"&&r[2]==="BRA")||f===r[5]);
+    document.getElementById("awl").innerHTML=rs.map(r=>{const p=r[6]?BY[r[6]]:null;
+      return `<div class="tr${r[2]==="BRA"?" br":""}"><span class="yr">${r[0]}</span><span class="win">${p?mg(p,34):awMg(r[1],r[2],34)}<span style="min-width:0"><b>${p?`<a href="#jogador-${p.id}">${r[1]}</a>`:r[1]}</b><small>${r[4]}</small></span></span><span class="clb">${r[3]}</span><span class="cc">${r[2]}</span></div>`}).join("");
+    document.querySelectorAll("#awc .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f))};
+  document.getElementById("awc").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){S.aw[key]=b.dataset.f;draw()}});
+  draw();
+}
+
 function opts(sel){return POS.map(g=>`<optgroup label="${g}s">${PL.filter(p=>p.pos===g).sort((a,b)=>a.nome.localeCompare(b.nome,"pt")).map(p=>`<option value="${p.id}" ${p.id===sel?"selected":""}>${p.nome} (${p.clube})</option>`).join("")}</optgroup>`).join("")}
 function comparar(){
   app.innerHTML=`<section class="wrap pg-h"><div class="eyebrow">Duelo de fichas</div><h1>Comparar jogadores</h1><p>Escolha dois jogadores e veja os números lado a lado. A barra mais forte marca quem leva a melhor em cada linha.</p></section>
@@ -580,7 +688,7 @@ function comparar(){
 function route(){
   const h=location.hash.slice(1)||"inicio";
   document.querySelectorAll("#nav a").forEach(a=>{const r=a.dataset.r;const on=h===r||(r==="jogadores"&&h.startsWith("jogador-"));on?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
-  if(h==="inicio")home();else if(h==="jogadores")jogadores();else if(h==="bola-de-ouro")bola();else if(h==="comparar")comparar();else if(h.startsWith("jogador-"))ficha(h.slice(8));else home();
+  if(h==="inicio")home();else if(h==="jogadores")jogadores();else if(h==="bola-de-ouro")bola();else if(h==="puskas")awards("puskas");else if(h==="the-best")awards("the-best");else if(h==="comparar")comparar();else if(h.startsWith("jogador-"))ficha(h.slice(8));else home();
   window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
